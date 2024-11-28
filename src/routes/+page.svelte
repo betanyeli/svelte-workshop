@@ -8,6 +8,9 @@
     todoList = todoList.filter((_, i) => i !== index)
   }
 
+  $effect(() => {
+    console.log('todoList', todoList)
+  })
 	// let count = $state(1);
   // let value = $state('');
   // let arr = $state([]);
@@ -22,11 +25,12 @@
   //   }, 2000);
   // });
 </script>
-
+<div>
+<h1>TO DO LIST</h1>
 <input bind:value />
 
-<button type='submit' onclick={() => {
-  todoList.push(value)
+<button disabled={value === ""} type='submit' onclick={() => {
+ todoList.push(value)
   value = ''
   }}>Add</button>
 
@@ -35,6 +39,54 @@
     <TodoItem todo={todo} index={i} onDeleteCallback={onDelete} />
   {/each}
 </ul>
+<a href="/about">About</a>
+</div>
+<style>
+
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    width: 75%;
+    margin: 0 auto;
+}
+  h1 {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #000000b4;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  button {
+    border-radius: 4px;
+    padding: 8px;
+    background-color: azure;
+    border: none;
+    color:cornflowerblue;
+  }
+
+  button:disabled {
+    background-color: lightgray;
+    color: gray;
+  }
+
+  input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+  }
+
+a {
+  text-decoration: none;
+  color: cornflowerblue;
+}
+</style>
 
 <!-- {value}
 
