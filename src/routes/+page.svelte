@@ -1,16 +1,16 @@
 <script>
 	import TodoItem from './TodoItem.svelte';
   let value = $state('');
-  let todoList = $state([]);
+  const { data } = $props();
+  const todo = data
 
   const onDelete = (index) => {
     console.log('remove')
-    todoList = todoList.filter((_, i) => i !== index)
+    //todos = todos.filter((_, i) => i !== index)
   }
 
-  $effect(() => {
-    console.log('todoList', todoList)
-  })
+  $inspect(data)
+
 	// let count = $state(1);
   // let value = $state('');
   // let arr = $state([]);
@@ -30,16 +30,15 @@
 <input bind:value />
 
 <button disabled={value === ""} type='submit' onclick={() => {
- todoList.push(value)
+ todos.push(value)
   value = ''
   }}>Add</button>
 
 <ul>
-  {#each todoList as todo, i}
+  {#each todos as todo, i}
     <TodoItem todo={todo} index={i} onDeleteCallback={onDelete} />
   {/each}
 </ul>
-<a href="/about">About</a>
 </div>
 <style>
 
@@ -81,11 +80,6 @@ div {
     border-radius: 4px;
     border: 1px solid lightgray;
   }
-
-a {
-  text-decoration: none;
-  color: cornflowerblue;
-}
 </style>
 
 <!-- {value}
